@@ -622,11 +622,17 @@
 
     /* FADE IN */
     .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      animation: fadeUp 0.7s ease both;
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.2s; }
+    .fade-up:nth-child(3) { animation-delay: 0.3s; }
+    .fade-up:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -890,18 +896,5 @@
     <span class="footer-copy">© 2026 · Automation Specialist · Nigeria</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Intersection observer for fade-up animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(el => {
-        if (el.isIntersecting) {
-          el.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.01 });
-
-    document.querySelectorAll('.fade-up').forEach(el => {
-      observer.observe(el);
-      // Also trigger for elements already in view on load
-      const rect = el.getBoundingClientRect();
-   
+  <script>
+    function handleSubmit(e) {
