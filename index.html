@@ -903,9 +903,16 @@
           el.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.01 });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => {
+      observer.observe(el);
+      // Also trigger for elements already in view on load
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      }
+    });
 
     // Form submit handler
     function handleSubmit(e) {
