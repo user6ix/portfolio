@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adedapo · Automation Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f8f6f1;
+      --cream: #f0ece3;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gray: #6b6b6b;
+      --gray-light: #d4d0c8;
+      --border: #e2ddd4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: rgba(248, 246, 241, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    .nav-cta {
+      background: var(--black);
+      color: var(--white) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover { background: var(--gold); color: var(--black) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--black);
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--black);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--gold); color: var(--black); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--black);
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateX(30px);
+      animation: slideIn 0.6s forwards;
+    }
+
+    .stat-card:nth-child(1) { animation-delay: 0.2s; }
+    .stat-card:nth-child(2) { animation-delay: 0.35s; }
+    .stat-card:nth-child(3) { animation-delay: 0.5s; }
+
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--black);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* SECTION SHARED */
+    section {
+      padding: 100px 5%;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--black);
+    }
+
+    /* SERVICES */
+    .services { background: var(--black); }
+    .services .section-label { color: var(--gold); }
+    .services h2 { color: var(--white); }
+    .services .section-header { border-color: rgba(255,255,255,0.1); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .service-card {
+      background: var(--black);
+      padding: 2.5rem;
+      transition: background 0.25s;
+      cursor: default;
+    }
+
+    .service-card:hover { background: #141414; }
+
+    .service-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(201,168,76,0.2);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .service-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .service-desc {
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* PORTFOLIO */
+    .portfolio { background: var(--cream); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .project-top {
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--gray);
+    }
+
+    .project-bottom {
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-tools {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.04em;
+    }
+
+    .project-arrow {
+      width: 32px;
+      height: 32px;
+      background: var(--black);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .project-card:hover .project-arrow { background: var(--gold); color: var(--black); }
+
+    /* TOOLS */
+    .tools-strip {
+      background: var(--white);
+      padding: 60px 5%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tools-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-bottom: 2rem;
+    }
+
+    .tools-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 2.5rem;
+    }
+
+    .tool-item {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0;
+      border-bottom: 1.5px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .tool-item:hover { color: var(--black); border-color: var(--gold); }
+
+    /* CONTACT */
+    .contact { background: var(--black); }
+    .contact h2 { color: var(--white); }
+    .contact .section-label { color: var(--gold); }
+    .contact .section-header { border-color: rgba(255,255,255,0.1); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-left p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.2s;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-link:hover { color: var(--gold); }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* FORM */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group select option { background: #1a1a1a; color: var(--white); }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      background: var(--gold);
+      color: var(--black);
+      padding: 1rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      align-self: flex-start;
+    }
+
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .form-success {
+      display: none;
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #050505;
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.04em;
+    }
+
+    /* FADE IN */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-right { display: none; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Adedapo A.</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span>Automation Specialist · Nigeria</span>
+        </div>
+        <h1>I build systems that work <em>while you sleep.</em></h1>
+        <p class="hero-desc">
+          Workflow automation using n8n, Make.com, and AI APIs. I connect your tools, eliminate manual work, and deploy intelligent systems that run on their own.
+        </p>
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn-primary">View My Work</a>
+          <a href="#contact" class="btn-outline">Get in Touch</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div>
+            <div class="stat-label">Specialization</div>
+            <div class="stat-value">n8n · Make.com · AI Agents</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔗</div>
+          <div>
+            <div class="stat-label">What I connect</div>
+            <div class="stat-value">APIs · Webhooks · Google Workspace</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🤖</div>
+          <div>
+            <div class="stat-label">AI Stack</div>
+            <div class="stat-value">Gemini · Claude · Anthropic API</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div>
+          <div class="section-label">What I Do</div>
+          <h2>Services</h2>
+        </div>
+      </div>
+      <div class="services-grid fade-up">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-title">Workflow Automation</div>
+          <p class="service-desc">Build end-to-end automation pipelines using n8n and Make.com. Connect your apps, eliminate repetitive tasks, and keep data flowing without manual effort.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-title">AI Agent Systems</div>
+          <p class="service-desc">Deploy intelligent agents powered by Gemini and Claude that take real actions — book appointments, screen leads, send alerts, and make decisions.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-title">Google Workspace Automation</div>
+          <p class="service-desc">Automate across Sheets, Gmail, Calendar, and Forms. Turn your Google Workspace into a fully connected operating system for your business.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <div class="service-title">Webhook & API Integration</div>
+          <p class="service-desc">Connect platforms that weren't built to talk to each other. Custom webhook setups, HTTP request flows, and API integrations tailored to your stack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS STRIP -->
+  <div class="tools-strip">
+    <div class="tools-label">Tools & Platforms</div>
+    <div class="tools-list">
+      <span class="tool-item">n8n</span>
+      <span class="tool-item">Make.com</span>
+      <span class="tool-item">Gemini API</span>
+      <span class="tool-item">Anthropic Claude</span>
+      <span class="tool-item">Google Sheets</span>
+      <span class="tool-item">Gmail</span>
+      <span class="tool-item">Google Calendar</span>
+      <span class="tool-item">Tally</span>
+      <span class="tool-item">Webhooks</span>
+      <span class="tool-item">Telegram</span>
+      <span class="tool-item">ClickUp</span>
+      <span class="tool-item">Vapi</span>
+      <span class="tool-item">Zapier</span>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div>
+          <div class="section-label">Selected Work</div>
+          <h2>Projects</h2>
+        </div>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card fade-up">
+          <div class="project-top">
+            <div class="project-tags">
+              <span class="tag">n8n</span>
+              <span class="tag">Verification</span>
+            </div>
+            <div class="project-title">Bot-Proof Voting System</div>
+            <p class="project-desc">A vote verification system that validates Twitter contest entries in real time — checking follower status, filtering bots, and logging results to Google Sheets automatically.</p>
+          </div>
+          <div class="project-bottom">
+            <span class="project-tools">Tally · n8n · TwitterAPI.io · Google Sheets</span>
+            <div class="project-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div class="project-top">
+            <div class="project-tags">
+              <span class="tag">Make.com</span>
+              <span class="tag">AI Screening</span>
+            </div>
+            <div class="project-title">AI Recruitment Screener</div>
+            <p class="project-desc">An end-to-end hiring pipeline that collects applications, extracts CV data with Gemini, scores candidates automatically, and routes results to Gmail and Google Sheets.</p>
+          </div>
+          <div class="project-bottom">
+            <span class="project-tools">Make.com · Gemini · Google Drive · Gmail</span>
+            <div class="project-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div class="project-top">
+            <div class="project-tags">
+              <span class="tag">n8n</span>
+              <span class="tag">Lead Routing</span>
+            </div>
+            <div class="project-title">Consulting Inquiry Router</div>
+            <p class="project-desc">A smart lead intake system that captures form submissions, creates tasks in ClickUp, and routes notifications via Gmail based on inquiry type — fully automated.</p>
+          </div>
+          <div class="project-bottom">
+            <span class="project-tools">Tally · n8n · ClickUp · Gmail</span>
+            <div class="project-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div class="project-top">
+            <div class="project-tags">
+              <span class="tag">Make.com</span>
+              <span class="tag">Healthcare</span>
+            </div>
+            <div class="project-title">Dental Clinic Appointment System</div>
+            <p class="project-desc">Automates appointment confirmations and follow-ups for dental clinics, with smart routing for Nigeria vs. international patients and 21/42-day follow-up windows.</p>
+          </div>
+          <div class="project-bottom">
+            <span class="project-tools">Google Forms · Make.com · Google Sheets · Gmail</span>
+            <div class="project-arrow">→</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div>
+          <div class="section-label">Let's Work Together</div>
+          <h2>Get in Touch</h2>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-left fade-up">
+          <p>Have a process you want automated? A workflow that's eating your team's time? Let's talk about what's possible.</p>
+          <p>I respond within 24 hours.</p>
+          <div class="contact-links">
+            <a href="https://x.com/n0tdapo" target="_blank" class="contact-link">
+              <div class="contact-link-icon">𝕏</div>
+              @n0tdapo
+            </a>
+            <a href="mailto:adeyemoadedapo@gmail.com" class="contact-link">
+              <div class="contact-link-icon">✉</div>
+              adeyemoadedapo@gmail.com
+            </a>
+          </div>
+        </div>
+        <div class="fade-up">
+          <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="your@email.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Service</label>
+              <select required>
+                <option value="" disabled selected>What do you need?</option>
+                <option>Workflow Automation</option>
+                <option>AI Agent System</option>
+                <option>Google Workspace Automation</option>
+                <option>API / Webhook Integration</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message</button>
+            <p class="form-success" id="formSuccess">✓ Message sent! I'll get back to you within 24 hours.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Adedapo A.</a>
+    <span class="footer-copy">© 2026 · Automation Specialist · Nigeria</span>
+  </footer>
+
+  <script>
+    // Intersection observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Form submit handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      const success = document.getElementById('formSuccess');
+      success.style.display = 'block';
+      e.target.reset();
+      setTimeout(() => { success.style.display = 'none'; }, 5000);
+    }
+  </script>
+</body>
+</html>
