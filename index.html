@@ -905,3 +905,16 @@
 
   <script>
     function handleSubmit(e) {
+<script>
+  fetch("https://free001.app.n8n.cloud/webhook/c563dab9-4cf4-4242-9fdb-726f6469b8ea", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      time: new Date().toISOString(),
+      page: document.title,
+      referrer: document.referrer || "Direct"
+    })
+  });
+</script>
+</body>
+</html>
